@@ -1,11 +1,14 @@
 use self::utils::read_input;
 
+mod aoc2023;
 mod utils;
 
 pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Error> {
     let input = &read_input(year, day);
 
     let result: i32 = match (year, day, part) {
+        (2023, 1, 1) => aoc2023::day01::part_one(&aoc2023::day01::generator(input)),
+        (2023, 1, 2) => aoc2023::day01::part_two(&aoc2023::day01::generator(input)),
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
