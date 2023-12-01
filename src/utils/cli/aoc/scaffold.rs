@@ -12,6 +12,7 @@ pub fn scaffold_year(year: u16) -> Result<(), std::io::Error> {
 
     let root_path = format!("src/advent_of_code/aoc{}", year);
     let input_path = format!("{}/input", root_path);
+    let input_gitkeep = format!("{}/.gitkeep", input_path);
     let mod_rs_path = format!("{}/mod.rs", root_path);
 
     match create_path(&root_path) {
@@ -38,8 +39,22 @@ pub fn scaffold_year(year: u16) -> Result<(), std::io::Error> {
         }
     }
 
+    match safe_create_file(&input_gitkeep) {
+        Ok(_) => {
+            println!("Created input folder .gitkeep under {}", &input_gitkeep);
+        }
+        Err(_e) => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "Failed to mod.rs",
+            ))
+        }
+    };
+
     match safe_create_file(&mod_rs_path) {
-        Ok(file) => file,
+        Ok(_) => {
+            println!("Created mod.rs under {}", &mod_rs_path);
+        }
         Err(_e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
