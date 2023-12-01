@@ -12,6 +12,8 @@ pub fn scaffold_year(year: u16) -> Result<(), std::io::Error> {
 
     let root_path = format!("src/advent_of_code/aoc{}", year);
     let input_path = format!("{}/input", root_path);
+    let mod_rs_path = format!("{}/mod.rs", root_path);
+
     match create_path(&root_path) {
         Ok(_) => {
             println!("Created folder {}", &root_path);
@@ -35,6 +37,16 @@ pub fn scaffold_year(year: u16) -> Result<(), std::io::Error> {
             ))
         }
     }
+
+    match safe_create_file(&mod_rs_path) {
+        Ok(file) => file,
+        Err(_e) => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "Failed to mod.rs",
+            ))
+        }
+    };
 
     Ok(())
 }
