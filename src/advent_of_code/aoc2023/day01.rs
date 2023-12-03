@@ -2,18 +2,18 @@ pub fn generator(input: &str) -> String {
     input.to_string()
 }
 
-pub fn part_one(input: &str) -> i32 {
+pub fn part_one(input: &str) -> u32 {
     let mut sum = 0;
     for line in input.lines() {
         let numbers: Vec<_> = line.chars().filter(|c| c.is_ascii_digit()).collect();
         sum += format!("{}{}", numbers.first().unwrap(), numbers.last().unwrap())
-            .parse::<i32>()
+            .parse::<u32>()
             .unwrap()
     }
     sum
 }
 
-pub fn part_two(input: &str) -> i32 {
+pub fn part_two(input: &str) -> u32 {
     let mut sum = 0;
 
     for line in input.lines() {
@@ -29,7 +29,7 @@ pub fn part_two(input: &str) -> i32 {
             .replace("nine", "n9e");
         let numbers: Vec<_> = line.chars().filter(|c| c.is_ascii_digit()).collect();
         sum += format!("{}{}", numbers.first().unwrap(), numbers.last().unwrap())
-            .parse::<i32>()
+            .parse::<u32>()
             .unwrap()
     }
 
