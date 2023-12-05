@@ -60,7 +60,6 @@ pub fn part_two(cards: &Vec<Card>) -> u32 {
             (matching_numbers.len() + i).try_into().unwrap()
         };
         for x in (i + 1)..(guard + 1) as usize {
-            println!("x: {}", x);
             card_counts[x] += card_counts[i];
         }
     }
