@@ -70,12 +70,12 @@ const DAY_TEMPLATE: &str = r#"pub fn generator(input: &str) -> String {
     input.to_string()
 }
 
-pub fn part_one(input: &str) -> i32 {
-    i32::MAX
+pub fn part_one(input: &str) -> u32 {
+    u32::MAX
 }
 
-pub fn part_two(input: &str) -> i32 {
-    i32::MAX
+pub fn part_two(input: &str) -> u32 {
+    u32::MAX
 }
 
 #[cfg(test)]
