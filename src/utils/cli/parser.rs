@@ -3,11 +3,11 @@ use clap::{Parser, Subcommand};
 #[derive(Subcommand, Debug)]
 pub enum Scaffold {
     Year {
-        #[arg(value_parser = clap::value_parser!(u16).range(2014..2024))]
+        #[arg(value_parser = clap::value_parser!(u16).range(2014..2030))]
         year: u16,
     },
     Day {
-        #[arg(value_parser = clap::value_parser!(u16).range(2014..2024))]
+        #[arg(value_parser = clap::value_parser!(u16).range(2014..2030))]
         year: u16,
         #[arg(value_parser = clap::value_parser!(u8).range(0..26))]
         day: u8,
@@ -34,13 +34,13 @@ pub enum AocCommands {
         r#type: Scaffold,
     },
     Download {
-        #[arg(value_parser = clap::value_parser!(u16).range(2014..2024))]
+        #[arg(value_parser = clap::value_parser!(u16).range(2014..2030))]
         year: u16,
         #[arg(value_parser = clap::value_parser!(u8).range(0..26))]
         day: u8,
     },
     Run {
-        #[arg(value_parser = clap::value_parser!(u16).range(2014..2024))]
+        #[arg(value_parser = clap::value_parser!(u16).range(2014..2030))]
         year: u16,
         #[arg(value_parser = clap::value_parser!(u8).range(0..26))]
         day: u8,
@@ -48,7 +48,7 @@ pub enum AocCommands {
         part: u8,
     },
     Solve {
-        #[arg(value_parser = clap::value_parser!(u16).range(2014..2024))]
+        #[arg(value_parser = clap::value_parser!(u16).range(2014..2030))]
         year: u16,
         #[arg(value_parser = clap::value_parser!(u16).range(0..26))]
         day: u8,
