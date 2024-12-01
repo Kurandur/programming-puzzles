@@ -1,6 +1,7 @@
 use self::utils::read_input;
 
 mod aoc2023;
+mod aoc2024;
 mod utils;
 
 pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Error> {
@@ -15,6 +16,8 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
         (2023, 3, 2) => aoc2023::day03::part_two(&aoc2023::day03::generator(input)),
         (2023, 4, 1) => aoc2023::day04::part_one(aoc2023::day04::generator(input)),
         (2023, 4, 2) => aoc2023::day04::part_two(&aoc2023::day04::generator(input)),
+        (2024, 1, 1) => aoc2024::day01::part_one(&aoc2024::day01::generator(input)),
+        (2024, 1, 2) => aoc2024::day01::part_two(&aoc2024::day01::generator(input)),
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
