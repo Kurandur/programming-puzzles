@@ -108,9 +108,4 @@ fn check_diagonal(grid: &[Vec<char>], x: usize, y: usize) -> bool {
     return true;
 }
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_part_one() {}
-}
+mod tests {}

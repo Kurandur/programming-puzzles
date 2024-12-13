@@ -2,7 +2,7 @@
 
 Various solutions to different programming-puzzles
 
-## Puzzle Solutions
+## Puzzles
 
 - [⭐Advent of Code🎄](src/advent_of_code)
 
