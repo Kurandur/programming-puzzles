@@ -28,7 +28,8 @@ Afterwards you can scaffold a day with:
 cargo run aoc scaffold day <YEAR> <DAY>
 ```
 
-This will create a file with this template:
+This will create a subfolder for the day, download the puzzle, convert it to markdown and
+create a day file with this template.
 
 ```rust
 pub fn generator(input: &str) -> String {
@@ -52,9 +53,20 @@ mod tests {
 }
 ```
 
+The only thing that needs to be done by hand is adding the new day to the match pattern in the `run_solution` function like this:
+
+```rust
+...
+(2024, 1, 1) => aoc2024::day01::part_one(&aoc2024::day01::generator(input)),
+(2024, 1, 2) => aoc2024::day01::part_two(&aoc2024::day01::generator(input)),
+...
+```
+
+I _hopefully_ will add a macro for this.
+
 #### Running solutions
 
-Before being able to run soltions you have to download your puzzle inputs.
+Before being able to run solutions you have to download your puzzle inputs.
 
 This can be automated, but before we have to save our auth token (which can be grabbed from your browsers localstorage)
 
