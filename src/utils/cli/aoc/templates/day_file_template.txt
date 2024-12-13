@@ -1,0 +1,19 @@
+pub fn generator(input: &str) -> String {
+    input.to_string()
+}
+
+pub fn part_one(input: &str) -> u32 {
+    u32::MAX
+}
+
+pub fn part_two(input: &str) -> u32 {
+    u32::MAX
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part_one() {}
+}
