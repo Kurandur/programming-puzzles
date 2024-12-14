@@ -2,6 +2,7 @@ use scraper::{Html, Selector};
 use std::{
     fs::{self, create_dir, File, OpenOptions},
     io::{Error, Write},
+    path::Path,
 };
 
 use super::SessionManager;
@@ -135,78 +136,113 @@ pub fn scaffold_day(year: u16, day: u8) -> Result<(), Error> {
         Ok(_) => {
             println!("Created folder {}", &day_folder_path);
         }
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Error while creating day folder",
-            ))
-        }
+        Err(e) => match e.kind() {
+            std::io::ErrorKind::AlreadyExists => {
+                println!(
+                    "Folder {} already exists, skipping folder creation.",
+                    &day_folder_path
+                );
+            }
+            _ => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    format!("Error while creating day folder: {}", e),
+                ));
+            }
+        },
     };
 
-    // create day file
-    let mut day_file = match safe_create_file(&day_file_path) {
-        Ok(file) => {
-            println!("Created file {}", &day_file_path);
-            file
-        }
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Failed to create day file",
-            ))
-        }
-    };
+    // create day file if it doesn't exist
+    if !Path::new(&day_file_path).exists() {
+        let mut day_file = match safe_create_file(&day_file_path) {
+            Ok(file) => {
+                println!("Created file {}", &day_file_path);
+                file
+            }
+            Err(_) => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Failed to create day file",
+                ));
+            }
+        };
 
-    let day_file_template =
-        fs::read_to_string("src/utils/cli/aoc/templates/day_file_template.txt")?;
-    match day_file.write_all(day_file_template.as_bytes()) {
-        Ok(()) => {
-            println!("Wrote day template to file {}", &day_file_path);
-        }
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Failed to write day mod.rs template",
-            ))
-        }
-    };
+        let day_file_template =
+            fs::read_to_string("src/utils/cli/aoc/templates/day_file_template.txt")?;
+        match day_file.write_all(day_file_template.as_bytes()) {
+            Ok(()) => {
+                println!("Wrote day template to file {}", &day_file_path);
+            }
+            Err(_) => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Failed to write day file template",
+                ));
+            }
+        };
+    } else {
+        println!(
+            "File already exists, skipping creation of {}",
+            &day_file_path
+        );
+    }
 
-    // day mod.rs
-    let mut day_mod_file = match safe_create_file(&day_mod_file_path) {
-        Ok(file) => file,
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Failed to create day file",
-            ))
-        }
-    };
-    let day_mod_file_template =
-        fs::read_to_string("src/utils/cli/aoc/templates/mod_file_template.txt")?;
-    let filled_day_mod_file_template =
-        day_mod_file_template.replace("{{DAY}}", &format!("{:02}", day));
+    // create day mod.rs file if it doesn't exist
+    if !Path::new(&day_mod_file_path).exists() {
+        let mut day_mod_file = match safe_create_file(&day_mod_file_path) {
+            Ok(file) => file,
+            Err(_) => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Failed to create day mod.rs file",
+                ));
+            }
+        };
 
-    match day_mod_file.write_all(filled_day_mod_file_template.as_bytes()) {
-        Ok(()) => {
-            println!("Wrote mod template to file {}", &day_mod_file_path);
-        }
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Failed to write day mod.rs template",
-            ))
-        }
-    };
+        let day_mod_file_template =
+            fs::read_to_string("src/utils/cli/aoc/templates/mod_file_template.txt")?;
+        let filled_day_mod_file_template =
+            day_mod_file_template.replace("{{DAY}}", &format!("{:02}", day));
+
+        match day_mod_file.write_all(filled_day_mod_file_template.as_bytes()) {
+            Ok(()) => {
+                println!("Wrote mod template to file {}", &day_mod_file_path);
+            }
+            Err(_) => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Failed to write mod.rs template",
+                ));
+            }
+        };
+    } else {
+        println!(
+            "File already exists, skipping creation of {}",
+            &day_mod_file_path
+        );
+    }
 
     // Readme
     let mut day_readme_file = match safe_create_file(&day_readme_file_path) {
         Ok(file) => file,
-        Err(_e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                "Failed to create day readme",
-            ))
-        }
+        Err(e) => match e.kind() {
+            std::io::ErrorKind::AlreadyExists => {
+                println!(
+                    "Readme {} already exists. Opening file instead.",
+                    &day_readme_file_path
+                );
+                OpenOptions::new()
+                    .read(true)
+                    .write(true)
+                    .open(&day_readme_file_path)?
+            }
+            _ => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    format!("Error while creating day folder: {}", e),
+                ));
+            }
+        },
     };
     let day_readme_template = fs::read_to_string("src/utils/cli/aoc/templates/day_readme.txt")?;
 
