@@ -1,9 +1,9 @@
 # ⭐Advent of Code🎄 2024
 
-|                 Year                 |  Stars  |
-| :----------------------------------: | :-----: |
-| [2024](/src/advent_of_code/aoc2024/) | 0/50 ⭐ |
-|                 2023                 | 0/50 ⭐ |
-|                 2022                 | 0/50 ⭐ |
-|                 2021                 | 0/50 ⭐ |
-|                 2020                 | 0/50 ⭐ |
+| Day                                                           | Part 1 | Part 2 |
+| ------------------------------------------------------------- | ------ | ------ |
+| [Day 1: Historian Hysteria](src/advent_of_code/aoc2024/day01) | ⭐     | ⭐     |
+| [Day 2: Red-Nosed Reports](src/advent_of_code/aoc2024/day02)  | ⭐     | ⭐     |
+| [Day 3: Mull It Over](src/advent_of_code/aoc2024/day03)       | ⭐     | ⭐     |
+| [Day 4: Ceres Search](src/advent_of_code/aoc2024/day04)       | ⭐     | ⭐     |
+| [Day 5: Print Queue](src/advent_of_code/aoc2024/day05)        | ⭐     | ⭐     |
