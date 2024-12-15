@@ -54,6 +54,17 @@ pub fn part_one(input: &str) -> u32 {
     visited_cells.len() as u32
 }
 
+fn get_index(direction: [isize; 2], position: [usize; 2], grid_width: usize) -> usize {
+    let dir_index = match direction {
+        [-1, 0] => 0,
+        [0, 1] => 1,
+        [1, 0] => 2,
+        [0, -1] => 3,
+        _ => unreachable!(),
+    };
+    position[0] * grid_width * 4 + position[1] * 4 + dir_index
+}
+
 fn does_guard_loop(
     grid: &Vec<Vec<char>>,
     start_position: [usize; 2],
@@ -61,9 +72,24 @@ fn does_guard_loop(
 ) -> bool {
     let mut guard_position = start_position;
     let mut direction = start_direction;
-    let mut visited_states: HashSet<([usize; 2], [isize; 2])> = HashSet::new();
 
-    visited_states.insert((guard_position, direction));
+    let grid_height = grid.len();
+    let grid_width = grid[0].len();
+
+    let mut visited_states = vec![false; grid_height * grid_width * 4];
+
+    let state_index = |position: [usize; 2], direction: [isize; 2]| -> usize {
+        let dir_index = match direction {
+            [-1, 0] => 0,
+            [0, 1] => 1,
+            [1, 0] => 2,
+            [0, -1] => 3,
+            _ => unreachable!(),
+        };
+        position[0] * grid_width * 4 + position[1] * 4 + dir_index
+    };
+
+    visited_states[get_index(direction, guard_position, grid_width)] = true;
 
     loop {
         let next_position = [
@@ -83,12 +109,13 @@ fn does_guard_loop(
                 [0, -1] => [-1, 0],
                 _ => unreachable!(),
             };
+            let index = get_index(direction, guard_position, grid_width);
+            if visited_states[index] {
+                return true;
+            }
+            visited_states[index] = true;
         } else {
             guard_position = next_position;
-        }
-
-        if !visited_states.insert((guard_position, direction)) {
-            return true;
         }
     }
 }
