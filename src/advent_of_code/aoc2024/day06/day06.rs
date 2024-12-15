@@ -112,21 +112,54 @@ pub fn part_two(input: &str) -> u32 {
             }
         }
     }
+
     let start_position = guard_position;
-    let mut loop_count = 0;
+    let start_direction = guard_direction;
 
-    for i in 0..grid.len() {
-        for j in 0..grid[i].len() {
-            if grid[i][j] == '.' && [i, j] != start_position {
-                grid[i][j] = '#';
-                if does_guard_loop(&grid, guard_position, guard_direction) {
-                    loop_count += 1;
-                }
+    let mut visited_cells: HashSet<[usize; 2]> = HashSet::new();
+    visited_cells.insert(guard_position);
 
-                grid[i][j] = '.';
-            }
+    loop {
+        let next_position = [
+            (guard_position[0] as isize + guard_direction[0]) as usize,
+            (guard_position[1] as isize + guard_direction[1]) as usize,
+        ];
+
+        if next_position[0] >= grid.len() || next_position[1] >= grid[next_position[0]].len() {
+            break;
+        }
+
+        if grid[next_position[0]][next_position[1]] == '#' {
+            guard_direction = match guard_direction {
+                [-1, 0] => [0, 1],
+                [0, 1] => [1, 0],
+                [1, 0] => [0, -1],
+                [0, -1] => [-1, 0],
+                _ => unreachable!(),
+            };
+        } else {
+            guard_position = next_position;
+            visited_cells.insert(guard_position);
         }
     }
+
+    guard_position = start_position;
+    guard_direction = start_direction;
+
+    let mut loop_count = 0;
+
+    for &[i, j] in visited_cells.iter() {
+        if grid[i][j] == '.' && [i, j] != start_position {
+            grid[i][j] = '#';
+
+            if does_guard_loop(&grid, guard_position, guard_direction) {
+                loop_count += 1;
+            }
+
+            grid[i][j] = '.';
+        }
+    }
+
     loop_count
 }
 
