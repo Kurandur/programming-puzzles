@@ -7,3 +7,4 @@
 | [Day 3: Mull It Over](/src/advent_of_code/aoc2024//day03)      | ⭐     | ⭐     |
 | [Day 4: Ceres Search](/src/advent_of_code/aoc2024//day04)      | ⭐     | ⭐     |
 | [Day 5: Print Queue](/src/advent_of_code/aoc2024//day05)       | ⭐     | ⭐     |
+| [Day 6: Guard Gallivant](/src/advent_of_code/aoc2024//day06)   | ⭐     | ⭐     |
