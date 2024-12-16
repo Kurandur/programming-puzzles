@@ -4,6 +4,11 @@ mod aoc2023;
 mod aoc2024;
 mod utils;
 
+pub enum SolutionResult {
+    U32(u32),
+    U64(u64),
+}
+
 pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Error> {
     let input = &read_input(year, day);
 
@@ -68,6 +73,12 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
         (2024, 6, 2) => {
             SolutionResult::U32(aoc2024::day06::part_two(&aoc2024::day06::generator(input)))
         }
+        (2024, 7, 1) => {
+            SolutionResult::U64(aoc2024::day07::part_one(aoc2024::day07::generator(input)))
+        }
+        (2024, 7, 2) => {
+            SolutionResult::U64(aoc2024::day07::part_two(aoc2024::day07::generator(input)))
+        }
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -75,6 +86,7 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
             ))
         }
     };
+
     let result_string = match result {
         SolutionResult::U32(value) => value.to_string(),
         SolutionResult::U64(value) => value.to_string(),
