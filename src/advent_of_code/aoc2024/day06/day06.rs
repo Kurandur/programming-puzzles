@@ -78,17 +78,6 @@ fn does_guard_loop(
 
     let mut visited_states = vec![false; grid_height * grid_width * 4];
 
-    let state_index = |position: [usize; 2], direction: [isize; 2]| -> usize {
-        let dir_index = match direction {
-            [-1, 0] => 0,
-            [0, 1] => 1,
-            [1, 0] => 2,
-            [0, -1] => 3,
-            _ => unreachable!(),
-        };
-        position[0] * grid_width * 4 + position[1] * 4 + dir_index
-    };
-
     visited_states[get_index(direction, guard_position, grid_width)] = true;
 
     loop {

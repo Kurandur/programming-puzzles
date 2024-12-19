@@ -43,7 +43,7 @@ fn is_equation_solveable_part_two(equation: &Equation) -> bool {
         let mut result = equation.numbers[0];
         let mut temp_combination = combination;
 
-        for (i, &num) in equation.numbers[1..].iter().enumerate() {
+        for (_i, &num) in equation.numbers[1..].iter().enumerate() {
             match temp_combination % 3 {
                 0 => {
                     result += num;

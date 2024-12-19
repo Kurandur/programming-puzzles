@@ -84,7 +84,7 @@ fn download_puzzle_text(year: u16, day: u8) -> Result<String, Error> {
     request_builder = request_builder.header("Cookie", format!("session={}", token));
     let request = match request_builder.build() {
         Ok(r) => r,
-        Err(e) => {
+        Err(_e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
                 "Request error",
@@ -93,7 +93,7 @@ fn download_puzzle_text(year: u16, day: u8) -> Result<String, Error> {
     };
     let response = match client.execute(request) {
         Ok(r) => r,
-        Err(e) => {
+        Err(_e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
                 "Response error",
@@ -102,7 +102,7 @@ fn download_puzzle_text(year: u16, day: u8) -> Result<String, Error> {
     };
     let body = match response.text() {
         Ok(body) => body,
-        Err(e) => return Err(std::io::Error::new(std::io::ErrorKind::Other, "Body error")),
+        Err(_e) => return Err(std::io::Error::new(std::io::ErrorKind::Other, "Body error")),
     };
 
     let document = Html::parse_document(&body);
