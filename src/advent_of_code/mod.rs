@@ -91,6 +91,30 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
         (2024, 9, 2) => {
             SolutionResult::U64(aoc2024::day09::part_two(&aoc2024::day09::generator(input)))
         }
+        (2024, 10, 1) => {
+            SolutionResult::U32(aoc2024::day10::part_one(aoc2024::day10::generator(input)))
+        }
+        (2024, 10, 2) => {
+            SolutionResult::U32(aoc2024::day10::part_two(aoc2024::day10::generator(input)))
+        }
+        (2024, 11, 1) => {
+            SolutionResult::U64(aoc2024::day11::part_one(&aoc2024::day11::generator(input)))
+        }
+        (2024, 11, 2) => {
+            SolutionResult::U64(aoc2024::day11::part_two(&aoc2024::day11::generator(input)))
+        }
+        (2024, 12, 1) => {
+            SolutionResult::U32(aoc2024::day12::part_one(&aoc2024::day12::generator(input)))
+        }
+        (2024, 12, 2) => {
+            SolutionResult::U32(aoc2024::day12::part_two(&aoc2024::day12::generator(input)))
+        }
+        (2024, 13, 1) => {
+            SolutionResult::U32(aoc2024::day13::part_one(aoc2024::day13::generator(input)))
+        }
+        (2024, 13, 2) => {
+            SolutionResult::U64(aoc2024::day13::part_two(aoc2024::day13::generator(input)))
+        }
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
