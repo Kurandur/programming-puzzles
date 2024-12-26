@@ -14,3 +14,4 @@
 | [Day 11: Plutonian Pebbles](/src/advent_of_code/aoc2024/day11)    | ⭐     | ⭐     |
 | [Day 12: Garden Groups](/src/advent_of_code/aoc2024/day12)        | ⭐     | ⭐     |
 | [Day 13: Claw Contraption](/src/advent_of_code/aoc2024/day13)     | ⭐     | ⭐     |
+| [Day 14: Restroom Redoubt](/src/advent_of_code/aoc2024/day14)     | ⭐     | ⭐     |
