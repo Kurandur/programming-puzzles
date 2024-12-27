@@ -62,7 +62,9 @@ pub enum RosalindProblem {
     #[clap(help = "Transcribing DNA into RNA")]
     Rna,
     #[clap(help = "Complementing a Strand of DNA")]
-    ReverseComplement,
+    Revc,
+    #[clap(help = "Rabbits and Recurrence Relations ")]
+    Fib,
 }
 
 #[derive(Subcommand, Debug)]

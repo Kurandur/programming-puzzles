@@ -10,8 +10,9 @@ pub fn run_problem(problem: &RosalindProblem) -> Result<String, std::io::Error> 
 
     let result = match problem {
         RosalindProblem::Dna => problems::dna::solve(input),
-        RosalindProblem::Rna => "No solution implemented!".to_string(),
-        RosalindProblem::ReverseComplement => "No solution implemented!".to_string(),
+        RosalindProblem::Rna => problems::rna::solve(input),
+        RosalindProblem::Revc => problems::revc::solve(input),
+        RosalindProblem::Fib => problems::fib::solve(input),
     };
     Ok(result)
 }
