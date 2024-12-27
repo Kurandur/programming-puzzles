@@ -1,10 +1,13 @@
 use std::process;
 
-use clap::Parser;
+use clap::{CommandFactory, Parser};
 
-use programming_puzzles::utils::cli::{
-    aoc::{download_input, run_day, scaffold_day, scaffold_year, solve_day, SessionManager},
-    AocCommands, Cli, ProgrammingPuzzles, Scaffold, SessionCommands,
+use programming_puzzles::{
+    rosalind::run_problem,
+    utils::cli::{
+        aoc::{download_input, run_day, scaffold_day, scaffold_year, solve_day, SessionManager},
+        AocCommands, Cli, ProgrammingPuzzles, RosalindCommands, Scaffold, SessionCommands,
+    },
 };
 
 fn main() {
@@ -68,8 +71,33 @@ fn main() {
         Some(ProgrammingPuzzles::LeetCode {}) => {
             println!("Leetcode was picked!")
         }
+        Some(ProgrammingPuzzles::ProjectEuler {}) => {
+            println!("Project euler was picked!")
+        }
+        Some(ProgrammingPuzzles::Rosalind { command }) => match command {
+            RosalindCommands::Run { problem } => match problem {
+                Some(selected_problem) => match run_problem(selected_problem) {
+                    Ok(result) => {
+                        println!("The result for problem {:?} is:", selected_problem);
+                        println!("{}", result)
+                    }
+                    Err(e) => {
+                        eprintln!("{}", e);
+                    }
+                },
+                None => {
+                    println!("Please pick a problem to run. Here are the available problems:");
+                }
+            },
+        },
+        Some(ProgrammingPuzzles::EverybodyCodes {}) => {
+            println!("Everybody codes was picked!")
+        }
         None => {
-            println!("No puzzle picked")
+            let mut cmd = Cli::command();
+            let help_message = cmd.render_help().to_string();
+            println!("Available options:");
+            println!("{}", help_message);
         }
     }
 }

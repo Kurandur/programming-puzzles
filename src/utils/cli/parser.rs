@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, ValueEnum};
 
 #[derive(Subcommand, Debug)]
 pub enum Scaffold {
@@ -55,13 +55,45 @@ pub enum AocCommands {
     },
 }
 
+#[derive(Debug, Clone, ValueEnum)]
+pub enum RosalindProblem {
+    #[clap(help = "Counting DNA Nucleotides")]
+    Dna,
+    #[clap(help = "Transcribing DNA into RNA")]
+    Rna,
+    #[clap(help = "Complementing a Strand of DNA")]
+    ReverseComplement,
+}
+
+#[derive(Subcommand, Debug)]
+pub enum RosalindCommands {
+    Run {
+        #[arg(value_enum, help = "The Rosalind problem to solve")]
+        problem: Option<RosalindProblem>,
+    },
+}
+
 #[derive(Subcommand, Debug)]
 pub enum ProgrammingPuzzles {
+    #[command(
+        about = "Advent of Code puzzles",
+        long_about = "Advent of Code (AOC) is a series of programming challenges released daily during the month of December. Use this command to manage and solve AOC puzzles."
+    )]
     Aoc {
         #[command(subcommand)]
         command: AocCommands,
     },
-    LeetCode {},
+    #[command(about = "LeetCode puzzles")]
+    LeetCode,
+    #[command(about = "Project Euler puzzles")]
+    ProjectEuler,
+    #[command(about = "Rosalind bioinformatics challenges")]
+    Rosalind {
+        #[command(subcommand)]
+        command: RosalindCommands,
+    },
+    #[command(about = "Everybody Codes puzzles")]
+    EverybodyCodes,
 }
 
 #[derive(Parser)]
