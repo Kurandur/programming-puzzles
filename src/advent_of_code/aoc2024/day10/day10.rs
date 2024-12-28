@@ -103,9 +103,4 @@ pub fn part_two(grid: Vec<Vec<u8>>) -> u32 {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_part_one() {}
-}
+mod tests {}

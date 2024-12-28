@@ -67,9 +67,4 @@ pub fn part_two(cards: &Vec<Card>) -> u32 {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_part_one() {}
-}
+mod tests {}

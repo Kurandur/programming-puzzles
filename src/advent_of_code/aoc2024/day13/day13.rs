@@ -110,9 +110,4 @@ pub fn part_two(input: String) -> u64 {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_part_one() {}
-}
+mod tests {}

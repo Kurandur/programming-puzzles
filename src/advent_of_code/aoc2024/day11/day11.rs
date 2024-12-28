@@ -63,9 +63,4 @@ fn count(number: u64, steps: usize, memo: &mut HashMap<(u64, usize), u64>) -> u6
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_part_one() {}
-}
+mod tests {}
