@@ -63,8 +63,12 @@ pub enum RosalindProblem {
     Rna,
     #[clap(help = "Complementing a Strand of DNA")]
     Revc,
-    #[clap(help = "Rabbits and Recurrence Relations ")]
+    #[clap(help = "Rabbits and Recurrence Relations")]
     Fib,
+    #[clap(help = "Computing GC Content")]
+    Gc,
+    #[clap(help = "Counting Point Mutations")]
+    Hamm,
 }
 
 #[derive(Subcommand, Debug)]
