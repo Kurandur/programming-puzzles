@@ -1,6 +1,6 @@
-<img align="left" width="200" src="/assets/euler_portrait.png" />
-
 # Project Euler
+
+<img align="left" width="200" src="/assets/euler_portrait.png" />
 
 Description from [projecteuler.net/about](https://projecteuler.net/about):
 
