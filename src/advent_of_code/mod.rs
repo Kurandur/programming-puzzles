@@ -7,6 +7,7 @@ mod utils;
 pub enum SolutionResult {
     U32(u32),
     U64(u64),
+    String(String),
 }
 
 pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Error> {
@@ -121,6 +122,24 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
         (2024, 14, 2) => {
             SolutionResult::U32(aoc2024::day14::part_two(aoc2024::day14::generator(input)))
         }
+        (2024, 15, 1) => {
+            SolutionResult::U32(aoc2024::day15::part_one(aoc2024::day15::generator(input)))
+        }
+        (2024, 15, 2) => {
+            SolutionResult::U32(aoc2024::day15::part_two(aoc2024::day15::generator(input)))
+        }
+        (2024, 16, 1) => {
+            SolutionResult::U32(aoc2024::day16::part_one(&aoc2024::day16::generator(input)))
+        }
+        (2024, 16, 2) => {
+            SolutionResult::U32(aoc2024::day16::part_two(&aoc2024::day16::generator(input)))
+        }
+        (2024, 17, 1) => {
+            SolutionResult::String(aoc2024::day17::part_one(aoc2024::day17::generator(input)))
+        }
+        (2024, 17, 2) => {
+            SolutionResult::U32(aoc2024::day17::part_two(aoc2024::day17::generator(input)))
+        }
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -132,6 +151,7 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
     let result_string = match result {
         SolutionResult::U32(value) => value.to_string(),
         SolutionResult::U64(value) => value.to_string(),
+        SolutionResult::String(value) => value,
     };
 
     Ok(result_string)
