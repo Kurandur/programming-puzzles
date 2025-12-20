@@ -23,7 +23,7 @@ pub fn part_one(input: &str) -> u32 {
 
     left.iter()
         .zip(right)
-        .map(|(l, r)| (l - r))
+        .map(|(l, r)| l - r)
         .collect::<Vec<u32>>()
         .into_iter()
         .sum()
