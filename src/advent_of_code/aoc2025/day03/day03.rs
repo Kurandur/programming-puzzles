@@ -24,24 +24,6 @@ pub fn part_one(input: &str) -> u32 {
     }
     sum
 }
-pub fn max_k_subsequence(digits: &[u8], k: usize) -> Vec<u8> {
-    let mut res = Vec::with_capacity(k);
-
-    for (i, &d) in digits.iter().enumerate() {
-        while let Some(&last) = res.last() {
-            if last < d && res.len() + (digits.len() - i) > k {
-                res.pop();
-            } else {
-                break;
-            }
-        }
-        if res.len() < k {
-            res.push(d);
-        }
-    }
-
-    res
-}
 
 pub fn part_two(input: &str) -> u64 {
     let mut sum: u64 = 0;

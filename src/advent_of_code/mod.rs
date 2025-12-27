@@ -159,6 +159,12 @@ pub fn run_solution(year: u16, day: u8, part: u8) -> Result<String, std::io::Err
         (2025, 3, 2) => {
             SolutionResult::U64(aoc2025::day03::part_two(&aoc2025::day03::generator(input)))
         }
+        (2025, 4, 1) => {
+            SolutionResult::U32(aoc2025::day04::part_one(aoc2025::day04::generator(input)))
+        }
+        (2025, 4, 2) => {
+            SolutionResult::U32(aoc2025::day04::part_two(aoc2025::day04::generator(input)))
+        }
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
