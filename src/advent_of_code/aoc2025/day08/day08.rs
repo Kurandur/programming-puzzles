@@ -126,8 +126,39 @@ pub fn part_one(junction_boxes: Vec<JunctionBox>) -> u32 {
     solve_part_one(junction_boxes, 1000)
 }
 
-pub fn part_two(junction_boxes: Vec<JunctionBox>) -> u32 {
-    u32::MAX
+pub fn part_two(junction_boxes: Vec<JunctionBox>) -> u64 {
+    let junction_count = junction_boxes.len();
+
+    let mut connections = Vec::new();
+    for i in 0..junction_count {
+        for j in i + 1..junction_count {
+            connections.push(Connection {
+                a: i,
+                b: j,
+                dist: junction_boxes[i].distance(&junction_boxes[j]),
+            });
+        }
+    }
+
+    connections.sort_unstable_by(|a, b| a.dist.cmp(&b.dist));
+
+    let mut circuits = Circuits::new(junction_count);
+    let mut unions = 0;
+
+    for c in connections {
+        if circuits.union(c.a, c.b) {
+            unions += 1;
+
+            // When everything is connected
+            if unions == junction_count - 1 {
+                let x1 = junction_boxes[c.a].x as i64;
+                let x2 = junction_boxes[c.b].x as i64;
+                return (x1 * x2) as u64;
+            }
+        }
+    }
+
+    1
 }
 
 #[cfg(test)]
